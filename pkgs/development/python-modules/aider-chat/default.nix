@@ -1,11 +1,11 @@
-{
-  lib,
-  stdenv,
-  python312,
-  fetchFromGitHub,
-  gitMinimal,
-  portaudio,
-  playwright-driver,
+{ lib
+, stdenv
+, python312
+, fetchFromGitHub
+, gitMinimal
+, portaudio
+, playwright-driver
+,
 }:
 
 let
@@ -109,6 +109,10 @@ let
       tqdm
       tree-sitter
       tree-sitter-languages
+      tree-sitter-c-sharp
+      tree-sitter-embedded-template
+      tree-sitter-language-pack
+      tree-sitter-yaml
       typing-extensions
       urllib3
       watchfiles
@@ -181,11 +185,10 @@ let
 
     passthru = {
       withPlaywright = aider-chat.overridePythonAttrs (
-        {
-          dependencies,
-          makeWrapperArgs,
-          propagatedBuildInputs ? [ ],
-          ...
+        { dependencies
+        , makeWrapperArgs
+        , propagatedBuildInputs ? [ ]
+        , ...
         }:
         {
           dependencies = dependencies ++ aider-chat.optional-dependencies.playwright;
